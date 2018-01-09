@@ -2,7 +2,7 @@ from pymongo import MongoClient
 import time
 from os import system
 
-system('title Mongo streamer')
+system('title streamer')
 MONGO_SERV = 'localhost:27017'
 SRC_COLLECTION = 'iris'
 OUT_COLLECTION = 'current'
