@@ -1,4 +1,4 @@
-#Kafka Producers project
+# Kafka Producers project
 This repository contains a set of kafka producer to stream datasets for my Spark projects.
 
 ## MongoDB Producer (MongoDB 3.6+)
