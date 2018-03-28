@@ -9,7 +9,7 @@ RD /s /q %TMP_HOME%\kafka-logs
 
 START CMD /c "title Zookeeper Server & MODE con: cols=80 lines=27 & %kafka_bats%\zookeeper-server-start %kafka_conf%\zookeeper.properties"
 ECHO "Press a button to start the Kafka server"
-PAUSE
+SLEEP 5
 START CMD /c "title Kafka Server & MODE con: cols=80 lines=27 & %kafka_bats%\kafka-server-start %kafka_conf%\server.properties"
 ECHO "Press a button to start streaming data"
 EXIT
