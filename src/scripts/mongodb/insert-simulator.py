@@ -57,6 +57,7 @@ docs = []
 
 batch = args.init_batch
 for doc in srcColl.find():
+    docs.append(doc)
     if len(docs) == batch:
         for d in docs:
             print (d)
@@ -64,7 +65,5 @@ for doc in srcColl.find():
         docs = []
         batch = args.batch
         time.sleep(args.timeout)
-    else:
-        docs.append(doc)
 
 client.close()
