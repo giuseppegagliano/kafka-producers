@@ -7,7 +7,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
 	"--src",
 	type=str,
-	default="iris",
+	default="motion_trajectory",
 	help="Source collection name."
 )
 parser.add_argument(
@@ -31,8 +31,14 @@ parser.add_argument(
 parser.add_argument(
 	"--batch",
 	type=int,
-	default="3",
+	default="1",
 	help="Number of lines to insert."
+)
+parser.add_argument(
+	"--init-batch",
+	type=int,
+	default="2",
+	help="Initial number of lines to insert."
 )
 parser.add_argument(
 	"--server",
@@ -47,16 +53,18 @@ db = client[args.db]
 srcColl = db[args.src]
 outColl = db[args.out]
 outColl.delete_many({})
-
 docs = []
+
+batch = args.init_batch
 for doc in srcColl.find():
-    if len(docs) == args.batch:
+    if len(docs) == batch:
         for d in docs:
             print (d)
             outColl.insert_one(d)
         docs = []
+        batch = args.batch
         time.sleep(args.timeout)
     else:
         docs.append(doc)
-        
+
 client.close()
