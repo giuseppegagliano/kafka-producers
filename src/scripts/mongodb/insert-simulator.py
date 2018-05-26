@@ -56,7 +56,8 @@ outColl.delete_many({})
 docs = []
 
 batch = args.init_batch
-for doc in srcColl.find():
+cursor = srcColl.find(no_cursor_timeout=True) # If timeout increase this option avoid that cursor closes
+for doc in cursor:
     docs.append(doc)
     if len(docs) == batch:
         for d in docs:
@@ -65,5 +66,5 @@ for doc in srcColl.find():
         docs = []
         batch = args.batch
         time.sleep(args.timeout)
-
+cursor.close()
 client.close()
